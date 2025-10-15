@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>モルタウン制作中</title>
+    <meta name="description" content="モルタウン！" />
+    <meta 
+      name="viewport" 
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=0.5, user-scalable=no"
+    />
+
+    <link rel="stylesheet" href="https://unpkg.com/itouhiro@latest/PixelMplus/webfonts/PixelMplus10-Regular.css">
+    
+    <link rel="stylesheet" href="./style3.css" />
+
+    <style>
+      .page {
+        display: none;
+      }
+      .page.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <button id = "homeButton" onclick= showPage('home')>ホーム</button>
+      <button onclick= showPage('game')>ゲーム(debug)</button>
+      <!-- <button onclick= showPage('waiting')>待機中(debug)</button>
+      <button onclick= showPage('result')>リザルト(debug)</button>
+      <button onclick= nextTurn()>ターン変更(debug)</button>
+      <button onclick= debug()>debug!</button> -->
+    </nav>
+
+    <div id = "game" class = "page">
+    <section>
+      <section>
+        <img
+          id="tecCard1"
+          class="topCards line1 tecCard card hide"
+          src="pngs/テクニカルカード.png"
+          alt="テクニカルカード"
+          width="100"
+          height="150"
+        />
+
+        <img
+          id="bunsiCard1"
+          class="topCards line1 bunsiCard card"
+          src="pngs/分子カード.png"
+          alt="分子ココ"
+          width="100"
+          height="150"
+        />
+
+        <img
+          id="bunsiCard2"
+          class="topCards line1 bunsiCard card"
+          src="pngs/分子カード.png"
+          alt="分子ココ"
+          width="100"
+          height="150"
+        />
+
+        <img
+          id="bunsiCard3"
+          class="topCards line1 bunsiCard card"
+          src="pngs/分子カード.png"
+          alt="分子ココ"
+          width="100"
+          height="150"
+        />
+
+        <!-- 重ねサンプル→ <img class = "bunsiCard6 topCards card" src="分子.png" style="position: absolute; left: 313px; top: 10px;" alt="分子ココ" width="100" height="150"> -->
+      </section>
+
+      <br />
+
+      <section>
+        <img
+          id="yama1"
+          class="topCards line2 yama card hide"
+          src="pngs/山札.png"
+          alt="山札"
+          width="100"
+          height="100"
+        />
+
+        <img
+          id="gensiCard1"
+          data-num="1"
+          class="topCards line2 gensiCard card"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="100"
+          height="100"
+        />
+
+        <img
+          id="gensiCard2"
+          data-num="2"
+          class="topCards line2 gensiCard card"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="100"
+          height="100"
+        />
+
+        <img
+          id="gensiCard3"
+          data-num="3"
+          class="topCards line2 gensiCard card"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="100"
+          height="100"
+        />
+      </section>
+      <!-- トップここまで↑ -->
+      <br />
+
+      <p id = "turn">読み込み中</p>
+      <div>
+            あなたのポイント: <span id="myPoint">0</span>
+            <br>
+            相手のポイント: <span id="opponentPoint">0</span>
+      </div>
+      <p id = "turnCount"></p>
+      
+      
+      <!--
+      ~5,~7→ ~14枚 -->
+      <div id = "displayCards">
+          <!-- 表示枚数5枚以下の時 -->
+        <section>
+        <img
+          id="displayCard1"
+          class="displayCard card below5"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="70"
+          height="70"
+        />
+        <img
+          id="displayCard2"
+          class="displayCard card below5"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="70"
+          height="70"
+          />
+        <img
+          id="displayCard3"
+          class="displayCard card below5"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="70"
+          height="70"
+          />
+        <img
+          id="displayCard4"
+          class="displayCard card below5"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="70"
+          height="70"
+          />
+        <img
+          id="displayCard5"
+          class="displayCard card below5"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="70"
+          height="70"
+          />
+          </section>
+          <br>
+          <!-- 表示枚数6枚以上の時 -->
+        <section>
+          <img
+          id="displayCard6"
+          class="displayCard card over6"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="50"
+          height="50"
+          />
+        <img
+          id="displayCard7"
+          class="displayCard card over6"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="50"
+          height="50"
+          />
+        <img
+          id="displayCard8"
+          class="displayCard card over6"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="50"
+          height="50"
+          />
+        <img
+          id="displayCard9"
+          class="displayCard card over6"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="50"
+          height="50"
+          />
+        <img
+          id="displayCard10"
+          class="displayCard card over6"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="50"
+          height="50"
+          />
+        <img
+          id="displayCard11"
+          class="displayCard card over6"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="50"
+          height="50"
+          />
+          <img
+            id="displayCard12"
+            class="displayCard card over6"
+            src="pngs/原子カード.png"
+            alt="原子カード"
+            width="50"
+            height="50"
+            />
+        </section>
+        <!--  -->
+        <p id ="whatBunsi"></p>
+        
+      </div>
+
+      <button id ="reset" onclick = "displayResetable()">リセット</button>
+      <button id="mix">調合！</button>
+
+      <!-- プレイヤーのカードここから↓ -->
+      <section>
+        <img
+          id="gensiCard4"
+          data-num="4"
+          class="underCards line3 gensiCard card"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="100"
+          height="100"
+        />
+
+        <img
+          id="gensiCard5"
+          data-num="5"
+          class="underCards line3 gensiCard card"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="100"
+          height="100"
+        />
+
+        <img
+          id="gensiCard6"
+          data-num="6"
+          class="underCards line3 gensiCard card"
+          src="pngs/原子カード.png"
+          alt="原子カード"
+          width="100"
+          height="100"
+        />
+
+        <img
+          onclick="reLoad()"
+          id="yama2"
+          class="underCards line3 yama card hide"
+          src="pngs/山札.png"
+          alt="山札"
+          width="100"
+          height="100"
+        />
+      </section>
+
+      <br />
+
+      <section>
+        <img
+         id="bunsiCard4"
+          class="underCards line4 bunsiCard card"
+          src="pngs/分子カード.png"
+          alt="分子ココ"
+          width="100"
+          height="150"
+        />
+
+        <img
+          id="bunsiCard5"
+          class="underCards line4 bunsiCard card"
+          src="pngs/分子カード.png"
+          alt="分子ココ"
+          width="100"
+          height="150"
+        />
+
+        <img
+          id="bunsiCard6"
+          class="underCards line4 bunsiCard card"
+          src="pngs/分子カード.png"
+          alt="分子ココ"
+          width="100"
+          height="150"
+        />
+
+        <img
+          onclick="shuffle()"
+          id="tecCard2"
+          class="underCards line4 tecCard card hide"
+          src="pngs/テクニカルカード.png"
+          alt="テクニカルカード"
+          width="100"
+          height="150"
+        />
+      </section>
+    </section>
+
+    <div id="status">読み込み中</div>
+
+    </div>
+
+     <div id = "home" class = "page active">
+       
+        <h1>モルタウン！！</h1>
+       
+       <!-- <button onclick = makeroom()>部屋を作る</button>
+       <button onclick = joinroom()>部屋に参加する</button> -->
+       <button onclick = matching()>部屋IDマッチ</button>
+
+       <button onclick = strayMatching()>ランダムマッチ</button>
+
+
+
+       <br>
+       <br>
+       <section>
+         <label for="inputId">ルームIDを入力(3~8文字):</label>
+          <br>
+          <input type="text" id="inputId" name="inputId" minlength="3" maxlength="8" required>
+
+          <select name="condition" id ="finishCondition" required>
+             <option>枚数で終了</option>
+             <option>ターンで終了</option>
+             <option>どっちでもいいよ</option>
+             </select>
+       </section>
+       
+
+       
+      </div>
+
+    <div id = "waiting" class = "page">
+        <h1>待機中</h1>
+        <p>player2を待機中…</p>
+      <section id = "yourRoomId">
+        <p>あなたのルームIDは</p>
+        <h3 id = "displayRoomId"></h3>
+        <!-- <button onclick = changeRoomId()>IDを変更</button> -->
+        <button onclick = copy()>ルームIDをコピー</button>
+      </section>
+
+     
+      
+    </div>
+
+    <div id = "result" class = "page">
+      <h1>これがリザルト画面</h1>
+      <p id = "yourResult">結果を取得...</p>
+      <p id = "opponentResult">結果を取得...</p>
+      <h2 id = "winner"></h2>
+
+      <button onclick = showPage('home')>ホームに戻る</button>
+
+      <button onclick = onemore()>もう一度戦う</button>
+      
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script3.js"></script>
+   
+  </body>
+</html>

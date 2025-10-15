@@ -1,0 +1,189 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Pixel+Mplus+12&display=swap');
+
+ body {
+      margin: 0;
+      overflow-x: auto; /* 横スクロールを許可 */
+      white-space: nowrap;  
+     background-color: white;
+     background-image: url("pngs/tile.png");
+     background-size: 100px 100px; /* タイルのサイズを設定 */
+     color: white;
+
+     
+     font-family: "PixelMplus10", monospace;
+     letter-spacing: 1px;
+       text-align: center;
+       padding-top: 50px;
+       image-rendering: pixelated;
+     
+    }
+
+
+button {
+  background-color: #133f52;
+  color: #c7f9ff;
+  border: 3px solid #3de0ff;
+  padding: 8px 15px;
+  /* font-family: "Press Start 2P", monospace; */
+  font-size: 10px;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.1s ease-in-out;
+
+}
+
+button:hover {
+  background-color: #1c5d75;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #0a2e40;
+  transform: scale(0.95);
+}
+
+#homeButton {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+.card{
+
+    border-radius:12px;
+}
+
+.topCards{
+
+    margin-top:1%;
+     white-space: nowrap;  
+    display: inline-block;
+
+}
+
+.line3{
+
+    margin-top:2%;
+     white-space: nowrap;  
+}
+
+.blank{
+
+    opacity:0;
+}
+
+#displayCards{
+    margin: 0 auto;
+    margin-top:1%;
+    /* margin-left:5px;
+    margin-right:0%; */
+    border:3px solid #3de0ff;
+    border-radius:12px;
+    height:230px;
+    width:390px;
+    background-color:#133f52;
+
+    position absolute;
+    /* transition: all 2s linear; */
+    transition: transform 0.5s ease-out, opacity 0.3s ease-in-out;
+
+}
+
+.below5{
+    margin-top:30px;
+    position: absolute;
+}
+
+#displayCard1{
+    margin-left:-190px;
+}
+/* -195ずつしていきましょう↓ */
+
+#displayCard2{
+    margin-left:-115px;
+}
+
+#displayCard3{
+    margin-left:-40px;
+}
+
+#displayCard4{
+    margin-left:35px;
+}
+
+#displayCard5{
+    margin-left:110px
+}
+
+.over6{
+    margin-top:0px;
+    /* absoluteで他の画像と自動で作られる距離を無視できる */
+    position: absolute;
+}
+
+#displayCard6{
+    margin-left:-190px;
+}
+
+#displayCard7{
+    margin-left:-135px;
+}
+
+#displayCard8{
+    margin-left:-80px;
+}
+
+#displayCard9{
+    margin-left:-25px;
+}
+
+#displayCard10{
+    margin-left:30px;
+}
+
+#displayCard11{
+    margin-left:85px;
+}
+
+#displayCard12{
+    margin-left:140px;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+.dark{
+    filter:brightness(50%);
+}
+
+#whatBunsi{
+    margin-top:160px;
+    color:black;
+}
+
+#turn{
+    margin-top:0px;
+    margin-left:10px;
+    font-size:20px;
+}
+
+
+
+.test{
+    margin-top:500px;
+}
+
+/* 画面の横幅からカード四枚分の400pxを引いたものをニで割った値を左側のmarginにすれば全体的に真ん中に来る？ */
+
+#myPoint{
+    /* position: absolute; */
+    
+}
+
+#setting {
+    
+}
