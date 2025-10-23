@@ -177,11 +177,15 @@ button:active {
     margin-top:500px;
 }
 
+/* 画面の横幅からカード四枚分の400pxを引いたものをニで割った値を左側のmarginにすれば全体的に真ん中に来る？ */
+
 #version{
     font-size:40%;
 }
 
-/* 画面の横幅からカード四枚分の400pxを引いたものをニで割った値を左側のmarginにすれば全体的に真ん中に来る？ */
+#setName{
+    margin-bottom:15px;
+}
 
 #myPoint{
     /* position: absolute; */
