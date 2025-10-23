@@ -27,7 +27,7 @@
   <body>
     <nav>
       <button id = "homeButton" onclick= showPage('home')>ホーム</button>
-      <button onclick= showPage('game')>ゲーム(debug)</button>
+      <!-- <button onclick= showPage('game')>ゲーム(debug)</button> -->
       <!-- <button onclick= showPage('waiting')>待機中(debug)</button>
       <button onclick= showPage('result')>リザルト(debug)</button>
       <button onclick= nextTurn()>ターン変更(debug)</button>
@@ -335,7 +335,13 @@
 
      <div id = "home" class = "page active">
        
-       <h1>モルタウン！(仮)<span id = "version">β版</span></h1>
+        <h1>モルタウン！(仮)<span id = "version">β版</span></h1>
+
+       <section id = "setName">
+          <label for="inputId">名前を設定</label>
+
+          <input type="text" id="inputPlayerName" name="inputPlayerName" minlength="1" maxlength="20" required>
+        </section>
        
        <!-- <button onclick = makeroom()>部屋を作る</button>
        <button onclick = joinroom()>部屋に参加する</button> -->
@@ -346,6 +352,7 @@
 
 
        <br>
+      
        <br>
        <section>
          <label for="inputId">ルームIDを入力(3~8文字):</label>
