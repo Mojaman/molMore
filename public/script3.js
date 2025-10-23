@@ -55,6 +55,7 @@ const system = {
   turnCounter: document.getElementById("turnCount"),
   inputId: document.getElementById("inputId"),
   yourRoomId: document.getElementById("yourRoomId"),
+  inputPlayerName: document.getElementById("inputPlayerName"),
 };
 //ボタンオブジェクト
 let Buttons = {
@@ -88,6 +89,12 @@ let finishCondition = 0;
 let turnCount = 0;
 //ボタンとかが押せる状況か
 let isClickable = true;
+//入力されたプレイヤーの名前を保存
+let playerName = null;
+//プレイヤー1の名前を保存
+let p1Name = null;
+//プレイヤー2の名前を保存
+let p2Name = null;
 //index側のpublic原子の配列を保存
 let publicgensi = [];
 //原子カードの配列
@@ -155,6 +162,7 @@ const bunsiName = [
   "エチレン",
   "ヒドラシン",
   "メタノール",
+  "炭酸水素ナトリウム",
 ];
 //clickGensiCardで使う
 let gensiCardStatus = [0, 0, 0, 0, 0, 0];
@@ -182,8 +190,11 @@ socket.on("player-joined", (num, Id) => {
   roomId = Id;
   console.log("部屋" + roomId + "にプレイヤー" + num + "として参加しました");
   system.status.innerText = "お前はプレイヤー" + num;
+   setPlayerName();
+  socket.emit("setPlayerName", roomId, playerName, num);
 });
 
+//高階関数つかってみた
 function checkTurn(fn) {
   if (turn === playerNumber && isClickable) {
     console.log("あなたのターンです");
@@ -309,6 +320,8 @@ function reset() {
 
   turnCount = 0;
 
+  setPlayerName();
+
   system.myPoint.innerText = myPoint;
   system.opponentPoint.innerText = opponentPoint;
 
@@ -318,7 +331,18 @@ function reset() {
 socket.on("nextTurn", (Turn, isCount) => {
   turn = Turn;
   console.log("ターン:" + turn);
-  system.turn.innerText = "プレイヤー" + turn + "のターン";
+  const names = [p1Name, p2Name]
+  if(names[turn - 1] !== null){
+    if(turn === 1){
+      system.turn.innerText = p1Name + "のターン";
+    }else if(turn === 2){
+      system.turn.innerText = p2Name + "のターン";
+    }
+  }else{
+    system.turn.innerText = "プレイヤー" + turn + "のターン";
+  }
+  console.log(playerName)
+  
 
   if (isCount) {
     turnCount++;
@@ -961,6 +985,21 @@ function setRoomId() {
     return null;
   }
 }
+
+function setPlayerName() {
+  if(system.inputPlayerName.value.length > 0){
+    playerName = system.inputPlayerName.value;
+  }else{
+    playerName = null;
+  }
+  
+};
+
+socket.on("reloadPlayerName", (names) => {
+  p1Name = names[1];
+  p2Name = names[2];
+  
+});
 
 function debug() {
   //publicgensi = ["n", "n", "n", "o", "o", "o"];
