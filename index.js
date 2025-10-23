@@ -118,6 +118,10 @@ io.on("connection", (socket) => {
         1: false,
         2: false,
       },
+      names: {
+        1: null,
+        2: null,
+      },
     };
 
     // プレイヤーを部屋に追加
@@ -355,6 +359,13 @@ io.on("connection", (socket) => {
       rooms[roomId].points[2] = 0;
       io.to(roomId).emit("onemoreGame");
     }
+  });
+
+  socket.on("setPlayerName", (roomId, name, num) => {
+    rooms[roomId].names[num] = name;
+    // console.log(roomId + "プレイヤー" + num + "の名前は" + name);
+
+    io.to(roomId).emit("reloadPlayerName", rooms[roomId].names)
   });
 
   socket.on("debug", (roomId) => {
