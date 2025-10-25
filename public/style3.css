@@ -162,7 +162,7 @@ button:active {
 
 #whatBunsi{
     margin-top:160px;
-    color:black;
+
 }
 
 #turn{
@@ -185,6 +185,21 @@ button:active {
 
 #setName{
     margin-bottom:15px;
+}
+
+#displayFinishCondition{
+    color: #ffff9e;
+}
+
+#reloadPage{
+    
+    text-decoration: underline;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+    color: #99ceff;
+    font-size: 10px;
 }
 
 #myPoint{
