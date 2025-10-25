@@ -204,8 +204,10 @@ io.on("connection", (socket) => {
         console.log(
           `プレイヤー${rooms[roomId].players[socket.id].number}が部屋${roomId}から退出しました`,
         );
+
+        io.to(roomId).emit("player-left");
         delete rooms[roomId];
-        socket.to(roomId).emit("player-left");
+        
 
         // 部屋が一人になったら削除
         // if (rooms[roomId].playerCount === 1) {
