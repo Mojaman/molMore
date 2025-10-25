@@ -56,6 +56,7 @@ const system = {
   inputId: document.getElementById("inputId"),
   yourRoomId: document.getElementById("yourRoomId"),
   inputPlayerName: document.getElementById("inputPlayerName"),
+  displayFinishCondition: document.getElementById("displayFinishCondition"),
 };
 //ボタンオブジェクト
 let Buttons = {
@@ -83,7 +84,7 @@ let myPoint = 0;
 let opponentPoint = 0;
 //mix時に作った原子の番号を保存
 let madeBunsi;
-//ゲームの終了条件を保存(0:枚数で終了,1:ポイントで終了)
+//ゲームの終了条件を保存(0:枚数で終了,1:ターンで終了,2:どっちでもいいよ)
 let finishCondition = 0;
 //現在何ターン目かを保存
 let turnCount = 0;
@@ -324,6 +325,10 @@ function reset() {
 
   system.myPoint.innerText = myPoint;
   system.opponentPoint.innerText = opponentPoint;
+
+//finishConditionの表示
+const FCList = ["15ポイントで終了", "5ターンで終了",];
+  system.displayFinishCondition.innerText = FCList[finishCondition];
 
   socket.emit("reloadTurn", roomId);
 }
@@ -951,6 +956,8 @@ socket.on("sendFinishCondition", (condition) => {
   finishCondition = condition;
   console.log("finishCondition:" + finishCondition);
   //alert(finishCondition);
+  const FCList = ["15ポイントで終了", "5ターンで終了",];
+  system.displayFinishCondition.innerText = FCList[finishCondition];
 });
 
 function whetherFinishGame() {
