@@ -1023,6 +1023,7 @@ function showHint() {
 system.overlay.addEventListener("click", (e) => {
   if (e.target.id === "overlay") {
     e.currentTarget.style.display = "none";
+    isHint = false;
   }
 });
 
