@@ -57,6 +57,8 @@ const system = {
   yourRoomId: document.getElementById("yourRoomId"),
   inputPlayerName: document.getElementById("inputPlayerName"),
   displayFinishCondition: document.getElementById("displayFinishCondition"),
+  hintBook: document.getElementById("hintBook"),
+  overlay: document.getElementById("overlay"),
 };
 //ボタンオブジェクト
 let Buttons = {
@@ -96,6 +98,8 @@ let playerName = null;
 let p1Name = null;
 //プレイヤー2の名前を保存
 let p2Name = null;
+//現在ヒントを表示中かどうか
+let isHint = false;
 //index側のpublic原子の配列を保存
 let publicgensi = [];
 //原子カードの配列
@@ -128,6 +132,7 @@ const gensiP = [
 //テスト用
 // const gensiP = ["n", "o", "o"];
 //分子の組み合わせを保存 [hの数,cの数,nの数,oの数]
+//hint.jsにも反映させるの忘れないように！
 const bunsi = {
   0: [2, 0, 0, 0], //水素
   1: [0, 0, 0, 2], //酸素
@@ -179,6 +184,8 @@ let displayInfo = [0, 0, 0, 0];
 let genso = ["h", "c", "n", "o"];
 //deckで作成可能な分子の番号を保存するリスト
 let makeableBunsi = [];
+
+//export {bunsi, bunsiName};　違うhtmlファイルにあるjsファイル同士ではimport/exportできない！！
 ////////////////////////////////////////////////////////////////////////////////////////
 
 console.log("ケミクエ！");
@@ -197,7 +204,7 @@ socket.on("player-joined", (num, Id) => {
 
 //高階関数つかってみた
 function checkTurn(fn) {
-  if (turn === playerNumber && isClickable) {
+  if (turn === playerNumber && isClickable && !(isHint)) {
     console.log("あなたのターンです");
     fn();
   }
@@ -1007,6 +1014,20 @@ socket.on("reloadPlayerName", (names) => {
   p2Name = names[2];
   
 });
+
+function showHint() {
+   isHint = true;
+  document.getElementById("overlay").style.display = "flex";
+}
+
+system.overlay.addEventListener("click", (e) => {
+  if (e.target.id === "overlay") {
+    e.currentTarget.style.display = "none";
+  }
+});
+
+
+
 
 function debug() {
   //publicgensi = ["n", "n", "n", "o", "o", "o"];
