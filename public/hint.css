@@ -1,0 +1,52 @@
+body {
+   text-align:center; 
+  padding-top:10px;
+}
+
+img {
+    width: 15%;
+    height: 15%;
+    margin: 0 5px; /* 画像間の余白を設定 */
+    image-rendering: pixelated;
+}
+
+.bunsi {
+    position absolute;
+    
+    display: block;
+      margin-left: auto;
+      margin-right: auto; /* ← これで左詰 */
+    
+    width: 100px;
+    height: 100%;
+    margin-top: 10px;
+    image-rendering: pixelated
+}
+
+.recipe {
+    /* display: inline-block; */
+    margin-bottom: 10px;
+    border: 2px solid #f2ff3d;
+    border-radius: 10px;
+    padding: 3px;
+    background-color: #fbed93;
+    color: #000000;
+   
+}
+
+hr {
+    border: 1px solid #e2901d;
+    margin: 10px 0;
+}
+
+.bunsiInfo {
+    display: flex;
+      align-items: center; /* 画像と文字を縦方向で中央揃え */
+      gap: 10px; /* 画像と説明文の間に余白 */
+    font-size:150%;
+    margin-right:20%;
+}
+
+.hide {
+    display:none;
+}
