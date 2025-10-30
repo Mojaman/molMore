@@ -76,16 +76,18 @@
         <!-- 重ねサンプル→ <img class = "bunsiCard6 topCards card" src="分子.png" style="position: absolute; left: 313px; top: 10px;" alt="分子ココ" width="100" height="150"> -->
       </section>
 
-      <br />
+      <br/>
 
       <section>
+        <!-- 相手の山札をヒントの書に変更 -->
         <img
-          id="yama1"
-          class="topCards line2 yama card hide"
+          id="hintBook"
+          class="topCards line2 hintBook"
           src="pngs/山札.png"
           alt="山札"
           width="100"
           height="100"
+          onclick="showHint()"
         />
 
         <img
@@ -335,6 +337,13 @@
     <div id="status">読み込み中</div>
 
     </div>
+
+    <!-- ヒントのオーバーレイ -->
+    <div id="overlay">
+      <iframe src="hint.html"></iframe>
+    </div>
+
+
 
      <div id = "home" class = "page active">
        
