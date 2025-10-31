@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // サーバー側に favicon を明示的に返すよう追加
 app.get("/favicon.ico", (req, res) => res.status(204).end());
 //ここまではコピペ(多分)
-console.log("ケミクエサーバー！");
+console.log("molモット！");
 
 // 検索用　gensiStatusReload
 //////////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("matching", (roomId) => {
-    console.log("matching");
+    // console.log("matching");
     io.to(socket.id).emit("checkedMatching", roomId in rooms);
   });
 
@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
     let beforeNum = 0;
     let makableRoomNum = 0;
     let strayCount = 0;
-    console.log("strayMatching");
+    // console.log("strayMatching");
     //存在しないなら作成、存在して1人なら入る
     for (const roomNum in rooms) {
       if (roomNum.length >= 9) {
@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
           makableRoomNum = beforeNum + 1;
         } else {
           beforeNum = number;
-          console.log("makableRoomNum:" + makableRoomNum);
+          // console.log("makableRoomNum:" + makableRoomNum);
         }
         
         if (rooms[roomNum].playerCount === 1) {
@@ -161,16 +161,16 @@ io.on("connection", (socket) => {
         roomId: roomId,
       };
 
-      console.log(rooms[roomId].finishCondition, condition)
+      // console.log(rooms[roomId].finishCondition, condition)
       if ((rooms[roomId].finishCondition === 0 && condition === 1) || (rooms[roomId].finishCondition === 1 && condition === 0) || (rooms[roomId].finishCondition === 2 && condition === 2)){
         rooms[roomId].finishCondition = Math.floor(Math.random() * 2);
-        console.log("conditionをランダムにしました" + rooms[roomId].finishCondition)
+        // console.log("conditionをランダムにしました" + rooms[roomId].finishCondition)
       }else if ((rooms[roomId].finishCondition === 2 && condition === 0) || (rooms[roomId].finishCondition === 0 && condition === 2)) {
         rooms[roomId].finishCondition = 0;
-        console.log("conditionを0にしました" + rooms[roomId].finishCondition)
+        // console.log("conditionを0にしました" + rooms[roomId].finishCondition)
       }else if ((rooms[roomId].finishCondition === 2 && condition === 1) || (rooms[roomId].finishCondition === 1 && condition === 2)) {
         rooms[roomId].finishCondition = 1;
-        console.log("conditionを1にしました" + rooms[roomId].finishCondition)
+        // console.log("conditionを1にしました" + rooms[roomId].finishCondition)
       };
 
       
@@ -240,7 +240,7 @@ io.on("connection", (socket) => {
     for (let roomId in rooms) {
       if (rooms[roomId].players[socket.id]) {
         rooms[roomId].players[socket.id].gensi1 = gensi1;
-        console.log("gensi1:" + gensi1 + "を受け取りました");
+        // console.log("gensi1:" + gensi1 + "を受け取りました");
         break;
       }
     }
@@ -250,7 +250,7 @@ io.on("connection", (socket) => {
     for (let roomId in rooms) {
       if (rooms[roomId].players[socket.id]) {
         rooms[roomId].players[socket.id].gensi2 = gensi2;
-        console.log("gensi2:" + gensi2 + "を受け取りました");
+        // console.log("gensi2:" + gensi2 + "を受け取りました");
         break;
       }
     }
@@ -260,14 +260,14 @@ io.on("connection", (socket) => {
     for (let roomId in rooms) {
       if (rooms[roomId].players[socket.id]) {
         rooms[roomId].players[socket.id].gensi3 = gensi3;
-        console.log("gensi3:" + gensi3 + "を受け取りました");
+        // console.log("gensi3:" + gensi3 + "を受け取りました");
         break;
       }
     }
   });
 
   socket.on("reLoad", (playerNum) => {
-    console.log("リロードしました");
+    // console.log("リロードしました");
 
     // 部屋システムでプレイヤーを検索(なにこれ)
     for (let roomId in rooms) {
@@ -285,7 +285,7 @@ io.on("connection", (socket) => {
           room.gensiInfo.publicgensi6 = player.gensi3;
         }
 
-        console.log(room.gensiInfo);
+        // console.log(room.gensiInfo);
         //socket.emit("reLoadedNewGensi", room.gensiInfo);
         io.to(roomId).emit("reLoadedNewGensi", room.gensiInfo);
         break;
@@ -294,23 +294,23 @@ io.on("connection", (socket) => {
   });
 
   socket.on("gensiStatus", (roomId, gensiStatus) => {
-    console.log("gensiStatus:" + gensiStatus);
+    // console.log("gensiStatus:" + gensiStatus);
     io.to(roomId).emit("gensiStatusReload", gensiStatus);
-    console.log("送られてきたroomId:" + roomId);
+    // console.log("送られてきたroomId:" + roomId);
   });
 
   socket.on("selectedGensiCard", (roomId, publicNum) => {
-    console.log("selectedGensiCard:" + publicNum);
+    // console.log("selectedGensiCard:" + publicNum);
     io.to(roomId).emit("reloadDisplay", publicNum);
   });
 
   socket.on("sendDisplayReset", (roomId) => {
-    console.log(roomId);
+    // console.log(roomId);
     io.to(roomId).emit("displayReset");
   });
 
   socket.on("emitWhatBunsi", (roomId, bunsiNum) => {
-    console.log("bunsiNum:" + bunsiNum);
+    // console.log("bunsiNum:" + bunsiNum);
     io.to(roomId).emit("reLoadWhatBunsi", bunsiNum);
   });
 
@@ -320,7 +320,7 @@ io.on("connection", (socket) => {
 
   socket.on("sendMix", (roomId, gensiP) => {
     io.to(roomId).emit("mix", gensiP);
-    console.log("mix");
+    // console.log("mix");
   });
 
   socket.on("socketReloadBlank", (roomId, blank) => {
@@ -337,7 +337,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("socketFinishGame", (roomId) => {
-    console.log("ゲーム終了!");
+    // console.log("ゲーム終了!");
     io.to(roomId).emit("finishGame");
   });
 
